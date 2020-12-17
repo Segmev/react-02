@@ -14,7 +14,7 @@ export default function PokemonDisplay({ pokemonUrl }) {
       }
     };
 
-    fetchData();
+    setTimeout(fetchData, 10000 * Math.random());
   }, [pokemonUrl])
 
   if (!pokemonData.id) {
@@ -22,6 +22,6 @@ export default function PokemonDisplay({ pokemonUrl }) {
   }
   return (<>
     <div>id: {pokemonData.id}</div>
-    <img alt="pokemon figure" src={pokemonData.sprites?.back_default} />
+    <img alt="pokemon figure" src={pokemonData.sprites?.front_default} />
   </>)
 }
