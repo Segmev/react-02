@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 export default function PokemonTypeList({ setType }) {
   let [types, setTypes] = useState([]);
-  let [selectedValue, setSelectedValue] = useState("");
+  let [selectedValue, setSelectedValue] = useState("normal");
 
   useEffect(() => {
-    const fetchTypes = () => {
+    const fetchTypes = () => { 
       fetch("https://pokeapi.co/api/v2/type")
         .then((response) => response.json())
         .then((data) => setTypes(data["results"]));
@@ -14,13 +14,15 @@ export default function PokemonTypeList({ setType }) {
   }, []);
 
   const handleSelection = (event) => {
-    setType(event.target.value);
     setSelectedValue(event.target.value);
   }
 
   return (
-    <select value={selectedValue} onChange={handleSelection}>
-      {types.map(({name}) => <option key={`pokemon-type-${name}`} value={name}>{name}</option>)}
-    </select>
+    <>
+      <button onClick={() => setType(selectedValue)} >Valider le type</button>
+      <select value={selectedValue} onChange={handleSelection}>
+        {types.map(({name}) => <option key={`pokemon-type-${name}`} value={name}>{name}</option>)}
+      </select>
+    </>
   )
 }

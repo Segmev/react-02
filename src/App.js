@@ -5,9 +5,8 @@ import PokemonList from './components/PokemonList';
 import PokemonTypeList from './components/PokemonTypeList';
 
 function App() {
-  let [selectedType, setSelectedType] = useState("normal");
+  let [selectedType, setSelectedType] = useState("");
   let [selectedPokemonUrl, setSelectedPokemonUrl] = useState(null);
-  console.log(selectedPokemonUrl)
 
   return (
     <div className="App">
