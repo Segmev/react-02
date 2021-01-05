@@ -5,22 +5,30 @@ export default function PokemonTypeList({ setType }) {
   let [selectedValue, setSelectedValue] = useState("");
 
   useEffect(() => {
+    let lastCalled = true;
     const fetchTypes = () => {
       fetch("https://pokeapi.co/api/v2/type")
         .then((response) => response.json())
-        .then((data) => setTypes(data["results"]));
-    }
+        .then((data) => lastCalled && setTypes(data["results"]));
+    };
     fetchTypes();
+    return () => {
+      lastCalled = false;
+    };
   }, []);
 
   const handleSelection = (event) => {
     setType(event.target.value);
     setSelectedValue(event.target.value);
-  }
+  };
 
   return (
     <select value={selectedValue} onChange={handleSelection}>
-      {types.map(({name}) => <option key={`pokemon-type-${name}`} value={name}>{name}</option>)}
+      {types.map(({ name }) => (
+        <option key={`pokemon-type-${name}`} value={name}>
+          {name}
+        </option>
+      ))}
     </select>
-  )
+  );
 }

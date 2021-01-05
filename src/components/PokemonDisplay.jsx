@@ -5,19 +5,20 @@ export default function PokemonDisplay({ pokemonUrl }) {
   console.log(pokemonData);
 
   useEffect(() => {
-    let lastCall = true;
+    let lastCalled = true;
     const fetchData = () => {
       if (typeof pokemonUrl === "string") {
         fetch(pokemonUrl)
           .then((response) => response.json())
-          .then((data) => lastCall && setPokemonData(data))
+          .then((data) => lastCalled && setPokemonData(data))
           .catch((e) => console.error(e));
       }
     };
 
-    setTimeout(fetchData, 10000 * Math.random());
+    //setTimeout(fetchData, 10000 * Math.random());
+    fetchData();
     return () => {
-      lastCall = false;
+      lastCalled = false;
     };
   }, [pokemonUrl]);
 
